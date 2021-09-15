@@ -8,7 +8,12 @@ client.commands = new Collection();
 
 // FILE READING IMPORTS
 require('dotenv').config();
+const fs = require('fs');
 
-module.exports = () => {
+const eventFiles = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
+
+module.exports = (async () => {
+    client.handleEvents(eventFiles, "./src/events");
+    
     client.login(process.env.DISCORD_TOKEN);
-}
+})
