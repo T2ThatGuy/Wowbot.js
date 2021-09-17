@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../database.js')
 
-const RoleMenu = sequelize.define("RoleMenus", {
+const ModActions = sequelize.define("ModerationActions", {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -30,7 +30,11 @@ const RoleMenu = sequelize.define("RoleMenus", {
     date: {
         type: Sequelize.DATE,
         allowNull: false,
+    },
+    type: {
+        type: Sequelize.STRING,
+        allowNull: false,
     }
 });
 
-module.exports = RoleMenu;
+module.exports = ModActions;
