@@ -49,7 +49,6 @@ module.exports = {
 
         if (channel) {
             await channel.send(`${interaction.options.getUser('target').username} user banned`);
-            return;
         }
 
         interaction.reply(`User ${target.username} was banned!`);
