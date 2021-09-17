@@ -6,7 +6,7 @@ const {
 } = require('discord-api-types/v9');
 const fs = require('fs');
 
-const clientId = '882263995363504128';
+const clientId = '873107460947320872';
 const guildId = '855967755538399233';
 
 module.exports = (client) => {
