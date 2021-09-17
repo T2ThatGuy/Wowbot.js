@@ -4,6 +4,7 @@ const sequelize = require('../database.js')
 const ModActions = sequelize.define("ModerationActions", {
     id: {
         type: Sequelize.INTEGER,
+        autoIncrement: true,
         allowNull: false,
         primaryKey: true,
     },
