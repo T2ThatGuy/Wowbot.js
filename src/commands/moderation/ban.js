@@ -57,3 +57,5 @@ module.exports = {
         
 	},
 };
+
+// TODO Add embed to mod logged response
