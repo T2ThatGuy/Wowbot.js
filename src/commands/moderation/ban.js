@@ -48,10 +48,12 @@ module.exports = {
         const channel = interaction.guild.channels.cache.get(mod_logging.mod_logging_channel_id);
 
         if (channel) {
-            await interaction.reply(`${interaction.options.getUser('target').username} user banned`);
+            await channel.send(`${interaction.options.getUser('target').username} user banned`);
             return;
         }
 
+        interaction.reply(`User ${target.username} was banned!`);
+        setTimeout(() => interaction.deleteReply(), 1000);
         
 	},
 };
