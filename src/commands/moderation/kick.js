@@ -34,8 +34,7 @@ module.exports = {
                 .setFields(
                     { name: 'Ban Reason', value: `${reason}` },
                     { name: 'Banned Id', value: `${user.id}` },
-                    { name: 'Time of kick', value: `${Date().toString()}` }
-                )
+                    { name: 'Time of kick', value: `${Date().toString()}` })
                 .setColor('#ff0000');
 
             await channel.send( {embeds: [embed]} );
