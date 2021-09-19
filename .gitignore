@@ -1,6 +1,9 @@
 
 # Temp Files
+depricated
 .env
+database.sqlite
+config.json
 
 # Dependancy Directories
 node_modules

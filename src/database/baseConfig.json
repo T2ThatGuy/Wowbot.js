@@ -1,0 +1,21 @@
+{
+    "mod_logging": {
+        "enabled": false,
+        "mod_logging_channel_id": ""
+    },
+    
+    "twitch_notif": {
+        "notification_channel_id": "",
+        "channel": "",
+        "enabled": false,
+        "interval": 30000
+    },
+
+    "youtube_notif": {
+        "notification_channel_id": "",
+        "channel_id": "",
+        "enabled": false,
+        "interval": 30000,
+        "cached_videos": []
+    }
+}

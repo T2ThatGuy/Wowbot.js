@@ -14,6 +14,8 @@ const functions = fs.readdirSync("./src/functions").filter(file => file.endsWith
 const eventFiles = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
 const commandFolders = fs.readdirSync("./src/commands");
 
+const sequelize = require('./database/database.js');
+
 module.exports = (async () => {
     for (file of functions) {
         require(`./functions/${file}`)(client);
@@ -21,6 +23,8 @@ module.exports = (async () => {
 
     client.handleEvents(eventFiles, "./src/events");
     client.handleCommands(commandFolders, "./src/commands");
+
+    await sequelize.sync().then((result) => {console.log("Database loaded");}).catch((err) => {console.log(err);});
     
     client.login(process.env.DISCORD_TOKEN);
 })
