@@ -3,7 +3,7 @@ const axios = require('axios');
 
 // File Imports
 require('dotenv').config();
-const { youtube_notif } = require('../../data/config.json');
+const { youtube_notif } = require('../../database/config.json');
 
 // Handles the calls to the Twitch API
 class YoutubeAPI {
@@ -61,3 +61,5 @@ class YoutubeAPI {
 }
 
 module.exports = YoutubeAPI;
+
+// TODO Write cached videos to file
