@@ -10,6 +10,8 @@ client.commands = new Collection();
 require('dotenv').config();
 const fs = require('fs');
 
+const YoutubeNotifications = require('./services/youtube/YoutubeNotifications.js');
+
 const functions = fs.readdirSync("./src/functions").filter(file => file.endsWith(".js"));
 const eventFiles = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
 const commandFolders = fs.readdirSync("./src/commands");
@@ -27,4 +29,7 @@ module.exports = (async () => {
     await sequelize.sync().then((result) => {console.log("Database loaded");}).catch((err) => {console.log(err);});
     
     client.login(process.env.DISCORD_TOKEN);
+
+    client.youtubeNotifs = new YoutubeNotifications(client);
+
 })
