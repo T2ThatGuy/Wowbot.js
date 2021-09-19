@@ -53,8 +53,8 @@ module.exports = {
                 .setTitle(`${interaction.user.username} has banned ${target.username}`)
                 .setFields(
                     { name: 'Ban Reason', value: `${reason}` },
-                    { name: 'Time of ban', value: `${Date().toString()}` },
-                    { name: 'Banned Id', value: `${target.id}` }
+                    { name: 'Banned Id', value: `${target.id}` },
+                    { name: 'Time of ban', value: `${Date().toString()}` }
                 )
                 .setColor('#ff0000');
 
