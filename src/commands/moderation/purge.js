@@ -46,7 +46,7 @@ module.exports = {
                 .setTitle(`${interaction.user.username} purged ${amount} from ${channel.name}`)
                 .setFields(
                     { name: 'Target Channel', value: `${channel}` },
-                    { name: 'Amount Cleard', value: `${amount}` },
+                    { name: 'Amount Cleared', value: `${amount}` },
                 )
                 .setColor('#ff0000');
 

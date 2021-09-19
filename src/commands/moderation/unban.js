@@ -56,9 +56,9 @@ module.exports = {
                 .setTitle(`${response.modName} has unbanned ${response.targetName}`)
                 .setFields(
                     { name: 'Ban Reason', value: `${response.reason}` },
+                    { name: 'Unbanned Id', value: `${response.targetId}` },
                     { name: 'Time of ban', value: `${response.date}` },
-                    { name: 'Time of unban', value: `${Date().toString()}` },
-                    { name: 'Unbanned Id', value: `${response.targetId}` }
+                    { name: 'Time of unban', value: `${Date().toString()}` }
                 )
                 .setColor('#ff0000');
 
