@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
 
 // DATA IMPORTS //
 const { mod_logging } = require('../../database/config.json');
@@ -19,10 +20,10 @@ module.exports = {
         }
 
 		const target = interaction.options.getUser('target');
-        interaction.guild.members.ban(target);
+        interaction.guild.members.ban(target, { reason: reason });
 
         try {
-            await ModActions.create({
+            const data = await ModActions.create({
                 modName: interaction.user.username,
                 modId: interaction.user.id,
                 targetName: target.username,
@@ -48,7 +49,16 @@ module.exports = {
         const channel = interaction.guild.channels.cache.get(mod_logging.mod_logging_channel_id);
 
         if (channel) {
-            await channel.send(`${interaction.options.getUser('target').username} user banned`);
+            const embed = new MessageEmbed()
+                .setTitle(`${interaction.user.username} has banned ${target.username}`)
+                .setFields(
+                    { name: 'Ban Reason', value: `${reason}` },
+                    { name: 'Time of ban', value: `${Date().toString()}` },
+                    { name: 'Banned Id', value: `${target.id}` }
+                )
+                .setColor('#ff0000');
+
+            await channel.send( {embeds: [embed]} );
         }
 
         interaction.reply(`User ${target.username} was banned!`);

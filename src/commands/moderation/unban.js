@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
 
 // DATA IMPORTS //
 const { mod_logging } = require('../../database/config.json');
@@ -35,6 +36,9 @@ module.exports = {
             // console.log(e)
             await interaction.reply('User id not found');
             setTimeout(() => interaction.deleteReply(), 3000);
+        
+            console.log(err);
+
             return;
         }
 
@@ -48,7 +52,17 @@ module.exports = {
         const channel = interaction.guild.channels.cache.get(mod_logging.mod_logging_channel_id);
 
         if (channel) {
-            await channel.send(`Unbanned user with id ${target} and name upon ban ${response.targetName}`);
+            const embed = new MessageEmbed()
+                .setTitle(`${response.modName} has unbanned ${response.targetName}`)
+                .setFields(
+                    { name: 'Ban Reason', value: `${response.reason}` },
+                    { name: 'Time of ban', value: `${response.date}` },
+                    { name: 'Time of unban', value: `${Date().toString()}` },
+                    { name: 'Unbanned Id', value: `${response.targetId}` }
+                )
+                .setColor('#ff0000');
+
+            await channel.send( { embeds: [embed]} );
             return;
         }
 	},
