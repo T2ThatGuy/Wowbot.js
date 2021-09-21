@@ -24,6 +24,7 @@ module.exports = {
 				.setName('channel')
 				.setDescription('Change the channel that will be pinged')
 				.addChannelOption(option => option.setName('channel').setDescription('Target channel to us')))),
+	defaultPermission: false,
 	async execute(interaction) {
 		try {
             commandGroup = interaction.options.getSubcommandGroup();
@@ -47,7 +48,7 @@ module.exports = {
 						await writeConfig(data);
 
 						interaction.reply(`Youtube notifications have been ${(data.youtube_notif.enabled) ? 'enabled': 'disabled'}`);
-						setTimeout(() => interaction.deleteRepl(), 2000);
+						setTimeout(() => interaction.deleteReply(), 2000);
 
 					})(interaction);
 

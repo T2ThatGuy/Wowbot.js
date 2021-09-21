@@ -37,7 +37,7 @@ class YoutubeAPI {
         try {
             // activities?part=snippet%2CcontentDetails&channelId=${youtube_notif['channel_id']}&key=${this.apiKey}
             // search?part=snippet&channelId=${youtube_notif['channel_id']}&order=date&key=${this.apiKey}
-            const response = await instance.get(`activities?part=snippet%2CcontentDetails&channelId=${youtube_notif['channel_id']}&key=${process.env.youtube_api_key}`);
+            const response = await instance.get(`activities?part=snippet%2CcontentDetails&channelId=${youtube_notif['channel_id']}&key=${process.env.YOUTUBE_API_KEY}`);
             return this.bulidResponseData(response.data);
 
         } catch (error) {
