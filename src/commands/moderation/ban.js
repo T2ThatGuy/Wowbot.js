@@ -8,7 +8,7 @@ const ModActions = require('../../database/models/moderationActions');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('ban')
-		.setDescription('Bans the targetted user')
+		.setDescription('Ban a member from the server')
         .addUserOption(option => option.setName("target").setDescription("The user that is getting banned"))
         .addStringOption(option => option.setName("reason").setDescription("The reason for the ban")),
 	async execute(interaction) {

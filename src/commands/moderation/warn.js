@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('warn')
-		.setDescription('Warns the targetted user')
+		.setDescription('Warn a member from the server')
         .addUserOption(option => option.setName('user').setDescription('The user to be warned'))
         .addStringOption(option => option.setName('reason').setDescription('The reason for the warn')),
 	async execute(interaction) {
