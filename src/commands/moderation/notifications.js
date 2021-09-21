@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
+const { moderation_roles } = require('../../database/config.json');
 const { writeConfig, readConfig } = require('../../utils/json.js');
 
 module.exports = {
@@ -43,9 +44,8 @@ module.exports = {
 				.setDescription('Change the channel that will be pinged')
 				.addChannelOption(option => option.setName('channel').setDescription('Target channel to us')))),
 	async execute(interaction) {
-		const data = await readConfig();
 
-		if (!interaction.member.roles.cache.has(data.moderation_roles.mod_id) && !interaction.member.roles.cache.has(data.moderation_roles.admin_id)) {
+		if (!interaction.member.roles.cache.has(moderation_roles.mod_id) && !interaction.member.roles.cache.has(moderation_roles.admin_id)) {
 			await interaction.reply('You do not have the permissions to access this command');
 			setTimeout(() => {interaction.deleteReply()}, 2000);
 			return;
