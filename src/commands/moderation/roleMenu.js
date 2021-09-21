@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 
 const RoleMenu = require('../../database/models/rolemenu.js');
+const { moderation_roles } = require('../../database/config.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -73,7 +74,13 @@ module.exports = {
             .setDescription("Lists all available role menu names")),
     
     async execute(interaction, client) {
-        
+
+        if (!interaction.member.roles.cache.has(moderation_roles.mod_id) && !interaction.member.roles.cache.has(moderation_roles.admin_id)) {
+			await interaction.reply('You do not have the permissions to access this command');
+			setTimeout(() => {interaction.deleteReply()}, 2000);
+			return;
+        }
+
         try {
             commandGroup = interaction.options.getSubcommandGroup();
         } catch (e) {
