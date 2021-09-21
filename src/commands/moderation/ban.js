@@ -2,8 +2,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 
 // DATA IMPORTS //
-const { mod_logging } = require('../../database/config.json');
-const ModActions = require('../../database/models/moderationActions');
+const ModActions = require('../../database/models/moderationActions.js');
+const { readConfig } = require('../../utils/json.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -12,6 +12,15 @@ module.exports = {
         .addUserOption(option => option.setName("target").setDescription("The user that is getting banned"))
         .addStringOption(option => option.setName("reason").setDescription("The reason for the ban")),
 	async execute(interaction) {
+
+        const data = await readConfig();
+        const mod_logging = data.mod_logging;
+
+        if (!interaction.member.roles.cache.has(data.moderation_roles.mod_id) && !interaction.member.roles.cache.has(data.moderation_roles.admin_id)) {
+			await interaction.reply('You do not have the permissions to access this command');
+			setTimeout(() => {interaction.deleteReply()}, 2000);
+			return;
+        }
 
         const reason = interaction.options.getString('reason');
 

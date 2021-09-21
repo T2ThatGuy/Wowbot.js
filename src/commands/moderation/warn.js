@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 
+const { readConfig } = require('../../utils/json');
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('warn')
@@ -8,7 +10,15 @@ module.exports = {
         .addUserOption(option => option.setName('user').setDescription('The user to be warned'))
         .addStringOption(option => option.setName('reason').setDescription('The reason for the warn')),
 	async execute(interaction) {
-    	
+        
+        const data = await readConfig();
+
+        if (!interaction.member.roles.cache.has(data.moderation_roles.mod_id) && !interaction.member.roles.cache.has(data.moderation_roles.admin_id)) {
+			await interaction.reply('You do not have the permissions to access this command');
+			setTimeout(() => {interaction.deleteReply()}, 2000);
+			return;
+        }
+
         const user = interaction.options.getUser('user');
         const reason = interaction.options.getString('reason');
 

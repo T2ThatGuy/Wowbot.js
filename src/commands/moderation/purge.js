@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 
-const { mod_logging } = require('../../database/config.json');
+const { readConfig } = require('../../utils/json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -11,6 +11,15 @@ module.exports = {
         .addChannelOption(option => option.setName('channel').setDescription('Channel to have the messages cleared')),
 	async execute(interaction) {
         
+        const data = await readConfig();
+        const mod_logging = data.mod_logging;
+
+        if (!interaction.member.roles.cache.has(data.moderation_roles.mod_id) && !interaction.member.roles.cache.has(data.moderation_roles.admin_id)) {
+			await interaction.reply('You do not have the permissions to access this command');
+			setTimeout(() => {interaction.deleteReply()}, 2000);
+			return;
+        }
+
         const amount = await interaction.options.getInteger('amount');
         let channel = await interaction.options.getChannel('channel');
 

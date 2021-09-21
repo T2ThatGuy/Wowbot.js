@@ -39,7 +39,7 @@ const helpEmbeds = {
         ),
     'Notifications': new MessageEmbed()
         .setTitle(':bell: Notification Help')
-        .setDescription('Here are the list of Notification commands... Each on will start with `notifications` and either `youtube` or `twitch`')
+        .setDescription('Here are the list of Notification commands... Each on will start with `notifications` followed by either `youtube` or `twitch`')
         .addFields(
             { name: '`toggle`', value: 'Enable / Disable the Notification', inline: true },
             { name: '`pingrole`', value: 'Set the role that will be pinged', inline: true },
