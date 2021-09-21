@@ -8,7 +8,7 @@ const ModActions = require('../../database/models/moderationActions');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('unban')
-		.setDescription('Unbans the targetted user')
+		.setDescription('Unban a member from the server')
         .addStringOption(option => option.setName("target").setDescription("The user that is getting unbanned")),
 	async execute(interaction) {
         

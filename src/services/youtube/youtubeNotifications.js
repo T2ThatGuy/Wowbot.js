@@ -1,18 +1,20 @@
 const YoutubeAPI = require('./youtubeAPI.js');
 const api = new YoutubeAPI();
 
-const { youtube_notif } = require('../../database/config.json');
+const { readConfig, writeConfig } = require('../../utils/json.js');
 require('dotenv').config();
 
 class YoutubeNotifications {
     constructor(client) {
-        this._interval = youtube_notif.interval;
         this._client = client;
-        this._timer = setInterval(() => {this.checkNewVideos(this._client)}, this._interval);
+        this._timer = setInterval(() => {this.checkNewVideos(this._client)}, 30000);
 
     }
 
     async checkNewVideos (client) {
+
+        let data = await readConfig();
+        let youtube_notif = data.youtube_notif;
 
         if (!youtube_notif.enabled) {
             return;
@@ -25,7 +27,10 @@ class YoutubeNotifications {
 
         if (youtube_notif.cached_videos.length === 0) {
             await channel.send(`<@&${youtube_notif.notification_role}>\n\nhttps://www.youtube.com/watch?v=${details[0]}`);
+
             youtube_notif.cached_videos = details;
+            data.youtube_notif = youtube_notif;
+            await writeConfig(data);
 
             return;
         }
@@ -50,6 +55,9 @@ class YoutubeNotifications {
         }
 
         youtube_notif.cached_videos = new_videos;
+        data.youtube_notif = youtube_notif;
+
+        await writeConfig(data);
 
     }
 
