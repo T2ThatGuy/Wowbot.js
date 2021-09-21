@@ -1,5 +1,5 @@
+const { readConfig } = require('../../utils/json.js');
 require('dotenv').config();
-const { twitch_notif } = require('../../database/config.json');
 
 const TwitchAPI = require('./twitchAPI.js');
 
@@ -8,14 +8,15 @@ api.__init();
 
 class TwitchNotifications {
     constructor(client) {
-        this._interval = twitch_notif.interval;
-        this._discord_channel = twitch_notif.notification_channel_id;
         this._client = client;
-        this._timer = setInterval(() => {this.checkLiveLoop(this._client)}, this._interval);
+        this._timer = setInterval(() => {this.checkLiveLoop(this._client)}, 30000);
 
     }
 
     async checkLiveLoop (client) {
+
+        let data = await readConfig();
+        let twitch_notif = data.twitch_notif;
 
         if (!twitch_notif.enabled) {
             return;
@@ -23,7 +24,7 @@ class TwitchNotifications {
 
         console.log("[TWITCH] Checking if streamer is live");
 
-        const channel = await client.channels.cache.get(this._discord_channel);
+        const channel = await client.channels.cache.get(twitch_notif.notification_channel_id);
         const details = await api.getUserStream(twitch_notif.channel);
 
         var messages = await channel.messages.fetch({limit: 100});
@@ -45,8 +46,6 @@ class TwitchNotifications {
                 }
             }
         }
-
-
     }
 
 }
