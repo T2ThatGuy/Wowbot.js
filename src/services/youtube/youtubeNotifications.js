@@ -4,7 +4,7 @@ const api = new YoutubeAPI();
 const { youtube_notif } = require('../../database/config.json');
 require('dotenv').config();
 
-class TwitchNotifications {
+class YoutubeNotifications {
     constructor(client) {
         this._interval = youtube_notif.interval;
         this._client = client;
@@ -18,16 +18,13 @@ class TwitchNotifications {
             return;
         }
 
-        console.log("[TWITCH] Checking if streamer has uploaded any new videos");
+        console.log("[YouTube] Checking if streamer has uploaded any new videos");
 
         const channel = await client.channels.cache.get(youtube_notif.notification_channel_id);
         const details = await api.getUserVideos(youtube_notif.channel_id);
 
         if (youtube_notif.cached_videos.length === 0) {
-            let message = (youtube_notif.notificaion_role === "") ? `<@${youtube_notif.notification_role}> ` : ``;
-            message += `\n\nhttps://www.youtube.com/watch?v=${details[0]}`;
-
-            await channel.send(message);
+            await channel.send(`<@&${youtube_notif.notification_role}>\n\nhttps://www.youtube.com/watch?v=${details[0]}`);
             youtube_notif.cached_videos = details;
 
             return;
@@ -49,10 +46,7 @@ class TwitchNotifications {
         }
 
         for (let video of newly_uploaded) {
-            let message = (youtube_notif.notificaion_role === "") ? `<@${youtube_notif.notification_role}> ` : ``;
-            message += `\n\nhttps://www.youtube.com/watch?v=${video}`;
-
-            await channel.send(message);
+            await channel.send(`<@&${youtube_notif.notification_role}>\n\nhttps://www.youtube.com/watch?v=${video}`);
         }
 
         youtube_notif.cached_videos = new_videos;
@@ -61,4 +55,4 @@ class TwitchNotifications {
 
 }
 
-module.exports = TwitchNotifications;
+module.exports = YoutubeNotifications;
