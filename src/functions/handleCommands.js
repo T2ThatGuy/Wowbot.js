@@ -6,8 +6,10 @@ const {
 } = require('discord-api-types/v9');
 const fs = require('fs');
 
-const clientId = '873107460947320872';
-const guildId = '855967755538399233';
+require('dotenv').config();
+
+const clientId = process.env.DISCORD_CLIENT;
+const guildId = process.env.TEST_GUILD_ID;
 
 module.exports = (client) => {
     client.handleCommands = async (commandsFolder, path) => {
@@ -27,7 +29,7 @@ module.exports = (client) => {
 
         const rest = new REST({
             version: '9'
-        }).setToken(process.env.discord_token);
+        }).setToken(process.env.DISCORD_TOKEN);
 
         (async () => {
             try {
