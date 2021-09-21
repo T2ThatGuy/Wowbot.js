@@ -11,6 +11,7 @@ require('dotenv').config();
 const fs = require('fs');
 
 const YoutubeNotifications = require('./services/youtube/YoutubeNotifications.js');
+const TwitchNotifications = require('./services/twitch/twitchNotifications.js');
 
 const functions = fs.readdirSync("./src/functions").filter(file => file.endsWith(".js"));
 const eventFiles = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
@@ -30,6 +31,7 @@ module.exports = (async () => {
     
     client.login(process.env.DISCORD_TOKEN);
 
+    client.twitchNotifs = new TwitchNotifications(client);
     client.youtubeNotifs = new YoutubeNotifications(client);
 
 })
