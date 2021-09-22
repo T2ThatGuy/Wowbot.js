@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 
+const ModActions = require('../../database/models/moderationActions.js');
 const { moderation_roles } = require('../../database/config.json');
 
 module.exports = {
