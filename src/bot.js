@@ -10,7 +10,7 @@ client.commands = new Collection();
 require('dotenv').config();
 const fs = require('fs');
 
-const YoutubeNotifications = require('./services/youtube/YoutubeNotifications.js');
+const YoutubeNotifications = require('./services/youtube/youtubeNotifications.js');
 const TwitchNotifications = require('./services/twitch/twitchNotifications.js');
 
 const functions = fs.readdirSync("./src/functions").filter(file => file.endsWith(".js"));

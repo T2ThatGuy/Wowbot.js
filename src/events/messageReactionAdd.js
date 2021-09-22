@@ -1,4 +1,4 @@
-const RoleMenu = require('../database/models/rolemenu.js');
+const RoleMenu = require('../database/models/roleMenu.js');
 
 module.exports = {
 	name: 'messageReactionAdd',
