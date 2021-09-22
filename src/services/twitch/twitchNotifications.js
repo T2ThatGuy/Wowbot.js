@@ -36,11 +36,11 @@ class TwitchNotifications {
                 }
             }
             
-            channel.send(`<@&${twitch_notif.notification_role}> \n${details['name']} is live: \n\nhttps://www.twitch.tv/${details['name']}`);
+            channel.send(`${(twitch_notif.notification_role === "" ? '' : `<@&${twitch_notif.notification_role}>` )}\n${details['name']} is live: \n\nhttps://www.twitch.tv/${details['name']}`);
 
         } else { // No longer live
             for (var msg of messages){
-                if (msg[1].content.includes("is live:")) {
+                if (msg[1].content.includes(`${twitch_notif.channel} is live:`)) {
                     await msg[1].delete();
                     return;
                 }

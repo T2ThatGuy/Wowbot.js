@@ -26,7 +26,7 @@ class YoutubeNotifications {
         const details = await api.getUserVideos(youtube_notif.channel_id);
 
         if (youtube_notif.cached_videos.length === 0) {
-            await channel.send(`<@&${youtube_notif.notification_role}>\n\nhttps://www.youtube.com/watch?v=${details[0]}`);
+            await channel.send(`${(youtube_notif.notification_role === "" ? '' : `<@&${youtube_notif.notification_role}>` )}\n\nhttps://www.youtube.com/watch?v=${details[0]}`);
 
             youtube_notif.cached_videos = details;
             data.youtube_notif = youtube_notif;
@@ -51,7 +51,7 @@ class YoutubeNotifications {
         }
 
         for (let video of newly_uploaded) {
-            await channel.send(`<@&${youtube_notif.notification_role}>\n\nhttps://www.youtube.com/watch?v=${video}`);
+            await channel.send(`${(youtube_notif.notification_role === "" ? '' : `<@&${youtube_notif.notification_role}>` )}\n\nhttps://www.youtube.com/watch?v=${video}`);
         }
 
         youtube_notif.cached_videos = new_videos;
