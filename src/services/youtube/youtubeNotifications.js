@@ -20,7 +20,7 @@ class YoutubeNotifications {
             return;
         }
 
-        console.log("[YouTube] Checking if streamer has uploaded any new videos");
+        // console.log("[YouTube] Checking if streamer has uploaded any new videos");
 
         const channel = await client.channels.cache.get(youtube_notif.notification_channel_id);
         const details = await api.getUserVideos(youtube_notif.channel_id);

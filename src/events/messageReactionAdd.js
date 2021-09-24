@@ -53,6 +53,9 @@ async function getMenu (message_id) {
 async function isEmojiValid(emoji, menu) {
     const roles = JSON.parse(menu.roles);
 
+    console.log(roles);
+    console.log(`Current emoji ${emoji}`)
+
     for (let role of roles) {
         if (emoji === role['emoji']) {
             return role['role'];

@@ -22,7 +22,8 @@ const helpEmbeds = {
             { name: '`unban`', value: 'Unban a member from the server', inline: true },
             { name: '`kick`', value: 'Kick a member from the server', inline: true },
             { name: '`warn`', value: 'Warn a member from the server', inline: true },
-            { name: '`purge`', value: 'Clear a certain amount of messages from a channel', inline: true }
+            { name: '`purge`', value: 'Clear a certain amount of messages from a channel', inline: true },
+            { name: '`view`', value: 'View a members warns', inline: true }
         ),
 	'RoleMenu': new MessageEmbed()
         .setTitle(':radio_button: Rolemenu Help')

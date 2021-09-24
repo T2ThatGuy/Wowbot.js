@@ -22,7 +22,7 @@ class TwitchNotifications {
             return;
         }
 
-        console.log("[TWITCH] Checking if streamer is live");
+        // console.log("[TWITCH] Checking if streamer is live");
 
         const channel = await client.channels.cache.get(twitch_notif.notification_channel_id);
         const details = await api.getUserStream(twitch_notif.channel);
