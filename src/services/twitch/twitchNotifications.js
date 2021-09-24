@@ -36,7 +36,7 @@ class TwitchNotifications {
                 }
             }
             
-            channel.send(`${(twitch_notif.notification_role === "" ? '' : `<@&${twitch_notif.notification_role}>` )}\n${details['name']} is live: \n\nhttps://www.twitch.tv/${details['name']}`);
+            channel.send(`${(twitch_notif.notification_role === "" ? '' : `<@&${twitch_notif.notification_role}>` )}\n${details['name']} is live: \n\n${details['title']}\nhttps://www.twitch.tv/${details['name']}`);
 
         } else { // No longer live
             for (var msg of messages){
